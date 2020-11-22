@@ -1,1 +1,1 @@
-# ec-javascript
+# EC Education - JavaScript
