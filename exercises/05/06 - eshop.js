@@ -6,6 +6,13 @@ class Stock {
     add_product(product) {
         this.products.push(product);
     }
+
+    inventory() {
+        console.log("All products");
+        for ( let product of this.products ) {
+            product.print();
+        }
+    }
 }
 
 class Product {
@@ -15,15 +22,18 @@ class Product {
     }
 
     print() {
-        console.log("Printing product");
-        console.log(this.title, this.no_in_stock);
+        console.log(this.title + ' - ' + this.no_in_stock);
     }
 }
 
 let stock = new Stock();
 
 let jacket = new Product("Jacket", 4);
-jacket.print();
+let pants = new Product("Pants", 5);
+let shoes = new Product("Shoes", 12);
 
 stock.add_product(jacket);
+stock.add_product(pants);
+stock.add_product(shoes);
 
+stock.inventory();
