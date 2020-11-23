@@ -17,6 +17,7 @@ people.push({
 
 console.log(people);
 
+
 let student_names = people.map( person => person.name );
 
 console.log(student_names);
