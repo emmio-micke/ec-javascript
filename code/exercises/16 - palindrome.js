@@ -12,4 +12,13 @@ Lorem ipsum // false
 
 */
 
-console.log("Lösning!");
+function palindrome(str) {
+    let str_reverse = str.split("").reverse().join("");
+
+    str = str.replaceAll(' ', '').toLowerCase();
+    str_reverse = str_reverse.replaceAll(' ', '').toLowerCase();
+
+    return ( str === str_reverse );
+}
+
+console.log(palindrome("sirap i Paris"));
