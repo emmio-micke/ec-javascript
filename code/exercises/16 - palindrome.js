@@ -11,3 +11,5 @@ Ni talar bra latin // true
 Lorem ipsum // false
 
 */
+
+console.log("Lösning!");
