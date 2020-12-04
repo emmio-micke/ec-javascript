@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables</title>
+    <style>
+        th, td {
+            border: 1px dashed black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Micke</td>
+                <td>44</td>
+                <td>Norrköping</td>
+            </tr>
+
+            <tr>
+                <td>Jessica</td>
+                <td>28</td>
+                <td>Helsingborg</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Medelvärde</td>
+                <td>37</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <table>
+        <tr>
+            <th colspan="4">Anställda</th>
+        </tr>
+
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Location</th>
+            <th>Comment</th>
+        </tr>
+
+        <tr>
+            <td rowspan="2">Micke</td>
+            <td>44</td>
+            <td>Norrköping</td>
+        </tr>
+
+        <tr>
+            <td>28</td>
+            <td>Helsingborg</td>
+        </tr>
+
+        <tr>
+            <td>Medelvärde</td>
+            <td>37</td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>
