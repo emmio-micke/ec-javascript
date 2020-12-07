@@ -8,45 +8,114 @@
 <body>
     <form>
         Namn:<br>
-        <input type="text"><br>
+        <input type="text" id="name" value="Micke"><br>
 
         Lösenord:<br>
-        <input type="password"><br>
+        <input type="password" id="pass"><br>
 
         Födelsedatum:<br>
-        <input type="date">
+        <input type="date" id="birthdate" value="1976-10-01"><br>
 
         Epost:<br>
-        <input type="email">
+        <input type="email" id="email"><br>
 
         Ålder:<br>
-        <input type="number"><br>
+        <input type="number" id="age" value="44"><br>
 
         Presentation:<br>
-        <textarea></textarea><br>
+        <textarea id="presentation">Lorem ipsum</textarea><br>
 
         Favoritfärg:<br>
-        <input type="color"><br>
+        <input type="color" id="favorite_color" value="#0000ff"><br>
 
         Favoritdag:<br>
-        <select>
-            <option>Måndag</option>
-            <option>Tisdag</option>
-            <option>Onsdag</option>
-            <option>Torsdag</option>
-            <option>Fredag</option>
-            <option>Lördag</option>
-            <option>Söndag</option>
+        <select id="favorite_day">
+            <option value="mondag">Måndag</option>
+            <option value="tuesday">Tisdag</option>
+            <option value="wednesday">Onsdag</option>
+            <option value="thursday">Torsdag</option>
+            <option value="friday">Fredag</option>
+            <option value="saturday">Lördag</option>
+            <option value="sunday">Söndag</option>
         </select><br>
 
         Mac eller PC:<br>
-        <input type="radio" name="mac_pc" id="mac"> <label for="mac">Mac</label><br>
+        <input type="radio" name="mac_pc" id="mac" checked> <label for="mac">Mac</label><br>
         <input type="radio" name="mac_pc" id="pc"> <label for="pc">PC</label><br>
 
         TV-serier du sett:<br>
-        <input type="checkbox" id="csi"> <label for="csi">CSI</label><br>
+        <input type="checkbox" id="csi" checked> <label for="csi">CSI</label><br>
         <input type="checkbox" id="friends"> <label for="friends">Friends</label><br>
-        <input type="checkbox" id="house"> <label for="house">House</label><br>
+        <input type="checkbox" id="house" checked> <label for="house">House</label><br>
+
+        Presentationen:<br>
+        <div id="presentation_output" style="border: 1px solid black; border-radius: 10px; padding: 10px; min-height: 20px; background-color: white;"></div>
+
+        <button type="button" id="btn_click">Klicka på mig!</button>
     </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(e) {
+            document
+                .getElementById("btn_click")
+                .addEventListener("click", function(e) {
+                    // Name
+                    console.log(`Hej ${ document.getElementById("name").value }!`);
+
+                    // Birthday
+                    let birthday = new Date(document.getElementById("birthdate").value);
+                    let birthday_month = birthday.getMonth();
+                    let birthday_day = birthday.getDate();
+
+                    let today = new Date();
+                    let one_day = 1000 * 60 * 60 * 24;
+
+                    let birthday_year = new Date() > new Date(today.getFullYear(), birthday_month, birthday_day)
+                        ? today.getFullYear() + 1
+                        : today.getFullYear();
+
+                    let next_birthday = new Date(birthday_year, birthday_month, birthday_day);
+
+                    let days_to_birthday = Math.ceil( (next_birthday - today) / one_day );
+
+                    let age = today.getFullYear() - birthday.getFullYear();
+
+                    console.log(`Du är ${ age } och fyller år om ${ days_to_birthday } dagar!`);
+                    
+                    // Right age
+                    let right_age = age == document.getElementById("age").value
+                        ? ''
+                        : 'inte ';
+
+                    console.log(`Du skrev ${ right_age }rätt ålder!`);
+
+                    // Color
+                    document.body.style.backgroundColor = document.getElementById("favorite_color").value;
+
+                    // Mac / PC
+                    let mac_pc = document.getElementById("mac").checked
+                        ? 'Mac'
+                        : 'PC';
+
+                    console.log(`Du valde ${mac_pc}`);
+
+                    // TV shows
+                    let tv_shows = [];
+                    if (document.getElementById("csi").checked) {
+                        tv_shows.push("CSI")
+                    }
+                    if (document.getElementById("friends").checked) {
+                        tv_shows.push("Friends")
+                    }
+                    if (document.getElementById("house").checked) {
+                        tv_shows.push("House")
+                    }
+                    console.log(`TV: ${ tv_shows.join(", ") }`);
+
+                    // Presentation
+                    document.getElementById("presentation_output").innerHTML = document.getElementById("presentation").innerHTML;
+                })
+        })
+    </script>
 </body>
 </html>
