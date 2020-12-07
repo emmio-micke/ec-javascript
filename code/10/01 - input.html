@@ -70,7 +70,7 @@
                     let today = new Date();
                     let one_day = 1000 * 60 * 60 * 24;
 
-                    let birthday_year = new Date() > new Date(today.getFullYear(), birthday_month, birthday_day)
+                    let birthday_year = today > new Date(today.getFullYear(), birthday_month, birthday_day)
                         ? today.getFullYear() + 1
                         : today.getFullYear();
 
@@ -97,7 +97,7 @@
                         ? 'Mac'
                         : 'PC';
 
-                    console.log(`Du valde ${mac_pc}`);
+                    console.log(`Du valde ${ mac_pc }`);
 
                     // TV shows
                     let tv_shows = [];
