@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Ettor</td>
+            <td><input type="number" id="player1_ones" min="0" max="5" step="1" value="0"></td>
+        </tr>
+
+        <tr>
+            <td>Tvåor</td>
+            <td><input type="number" id="player1_twos" min="0" max="10" step="2" value="0"></td>
+        </tr>
+
+        <tr>
+            <td>Treor</td>
+            <td><input type="number" id="player1_threes" min="0" max="15" step="3" value="0"></td>
+        </tr>
+
+        <tr>
+            <td>Fyror</td>
+            <td><input type="number" id="player1_fours" min="0" max="20" step="4" value="0"></td>
+        </tr>
+
+        <tr>
+            <td>Femmor</td>
+            <td><input type="number" id="player1_fives" min="0" max="25" step="5" value="0"></td>
+        </tr>
+
+        <tr>
+            <td>Sexor</td>
+            <td><input type="number" id="player1_sixes" min="0" max="30" step="6" value="0"></td>
+        </tr>
+
+        <tr>
+            <td>Summa</td>
+            <td id="player1_partsum1"></td>
+        </tr>
+
+        <tr>
+            <td>Bonus</td>
+            <td id="player1_bonus"></td>
+        </tr>
+
+    </table>
+
+    <button type="button" id="calc">Beräkna</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document
+                .getElementById("calc")
+                .addEventListener("click", function() {
+                    let no_of_players = 1;
+                    for (let player = 1; player <= no_of_players; player++) {
+                        let part_sum = document.getElementById("player" + player + "_ones").valueAsNumber;
+                        part_sum += document.getElementById("player" + player + "_twos").valueAsNumber;
+                        part_sum += document.getElementById("player" + player + "_threes").valueAsNumber;
+                        part_sum += document.getElementById("player" + player + "_fours").valueAsNumber;
+                        part_sum += document.getElementById("player" + player + "_fives").valueAsNumber;
+                        part_sum += document.getElementById("player" + player + "_sixes").valueAsNumber;
+
+                        document.getElementById("player" + player + "_partsum1").innerHTML = part_sum;
+                        
+                        document.getElementById("player" + player + "_bonus").innerHTML = part_sum >= 63 ? 50 : 0;
+                    }
+                })
+        })
+    </script>
+</body>
+</html>
