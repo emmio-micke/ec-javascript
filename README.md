@@ -1,3 +1,1 @@
 # EC Education - JavaScript
-
-Hello
