@@ -9,3 +9,8 @@ Tecknet . (punkt) om det inte är det första eller sista tecknet och inte följ
 
 */
 
+const paragraph = 'mikael.olsson@emmio.se';
+const regex = /^\w+([\.-]?\w+)*@\w+([\.])*(\.\w{2,3})+$/;
+const found = paragraph.match(regex);
+
+console.log(found[0]);
