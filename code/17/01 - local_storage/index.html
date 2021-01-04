@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+</head>
+
+<body>
+    <form>
+        <p>
+            Name:<br>
+            <input type="text" id="txtName">
+        </p>
+
+        <p>
+            Email:<br>
+            <input type="email" id="txtEmail">
+        </p>
+        <button type="button" id="btnSave">Save</button>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let save_button = document.getElementById('btnSave');
+            let name = document.getElementById('txtName');
+            let email = document.getElementById('txtEmail');
+
+            name.value = localStorage.getItem('name');
+            email.value = localStorage.getItem('email');
+
+            save_button.addEventListener('click', () => {
+                localStorage.setItem('name', name.value);
+                localStorage.setItem('email', email.value);
+            })
+        })
+    </script>
+</body>
+
+</html>
