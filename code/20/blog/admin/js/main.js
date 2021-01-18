@@ -7,6 +7,12 @@ class Posts {
         this.get_authors();
     }
 
+    add_post(data) {
+        this.posts.push(new Post(data));
+
+        this.add_article_list_items();
+    }
+
     async get_authors() {
         let response = await fetch(`https://jsonplaceholder.typicode.com/users`);
         this.authors = await response.json();
@@ -126,8 +132,6 @@ document.addEventListener('DOMContentLoaded', e => {
             }
 
             if ('BUTTON' === e.target.tagName && 'Delete' === e.target.textContent && confirm('Do you really want to delete this post?')) {
-                console.log(`delete post: ${e.target.dataset.id}`);
-
                 let post_id = e.target.dataset.id;
 
                 let url = `https://jsonplaceholder.typicode.com/posts/${post_id}`;
@@ -141,8 +145,6 @@ document.addEventListener('DOMContentLoaded', e => {
                     })
                     .then(data => {
                         posts.remove_post(post_id);
-
-                        console.dir(posts);
 
                         document
                             .querySelector(`tr[data-id="${post_id}"]`)
@@ -172,35 +174,69 @@ document.addEventListener('DOMContentLoaded', e => {
                 .getElementById('btn-save')
                 .getAttribute('data-id');
 
-            let url = `https://jsonplaceholder.typicode.com/posts/${post_id}`;
+            if (null === post_id) {
+                let url = `https://jsonplaceholder.typicode.com/posts/`;
 
-            fetch(url, {
-                method: 'PUT',
-                body: JSON.stringify(article)
-            })
-                .then(response => {
-                    console.dir(response);
-                    return response.json()
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(article)
                 })
-                .then(data => {
-                    let post = posts.get_article(post_id);
+                    .then(response => {
+                        console.dir(response);
+                        return response.json()
+                    })
+                    .then(data => {
+                        article.id = data.id;
+                        console.dir(data);
+                        posts.add_post(article);
 
-                    post.author_id = article.userId;
-                    post.get_user();
-                    post.title = article.title;
-                    post.body = article.body;
+                        form.style.display = 'none';
+                    })
+            } else {
+                let url = `https://jsonplaceholder.typicode.com/posts/${post_id}`;
 
-                    document
-                        .querySelector(`tr[data-id="${post_id}"] td[data-name="title"]`)
-                        .textContent = article.title;
-
-                    document
-                        .querySelector(`tr[data-id="${post_id}"] td[data-name="author"]`)
-                        .textContent = posts.get_author(article.userId).name;
-
-                    form.style.display = 'none';
+                fetch(url, {
+                    method: 'PUT',
+                    body: JSON.stringify(article)
                 })
+                    .then(response => {
+                        console.dir(response);
+                        return response.json()
+                    })
+                    .then(data => {
+                        let post = posts.get_article(post_id);
+
+                        post.author_id = article.userId;
+                        post.get_user();
+                        post.title = article.title;
+                        post.body = article.body;
+
+                        document
+                            .querySelector(`tr[data-id="${post_id}"] td[data-name="title"]`)
+                            .textContent = article.title;
+
+                        document
+                            .querySelector(`tr[data-id="${post_id}"] td[data-name="author"]`)
+                            .textContent = posts.get_author(article.userId).name;
+
+                        form.style.display = 'none';
+                    })
+            }
         })
+
+    document
+        .getElementById('btn-create')
+        .addEventListener('click', e => {
+            form.style.display = 'block';
+
+            document.getElementById('edit-title').value = '';
+            document.getElementById('edit-body').innerHTML = '';
+            document.getElementById('edit-authors').value = '';
+
+            let post_id = document
+                .getElementById('btn-save')
+                .getAttribute('data-id');
+        });
 })
 
 
