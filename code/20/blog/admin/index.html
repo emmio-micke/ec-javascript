@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <form id="edit-post">
+        <table>
+            <tr>
+                <td>Title</td>
+                <td><input id="edit-title"></td>
+            </tr>
+
+            <tr>
+                <td>Body</td>
+                <td><textarea id="edit-body"></textarea></td>
+            </tr>
+
+            <tr>
+                <td>Author</td>
+                <td>
+                    <select id="authors">
+                        <option>Kalle</option>
+                        <option>Jessica</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <button type="button">Save</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="main-article-list-tbody"></tbody>
+    </table>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

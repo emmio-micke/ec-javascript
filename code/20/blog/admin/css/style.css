@@ -1,0 +1,8 @@
+td,
+th {
+  border: 1px dashed black;
+}
+
+form#edit-post {
+  display: none;
+}

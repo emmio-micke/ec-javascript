@@ -28,11 +28,52 @@ class Dice {
         this.dice_objects = [];
         this.dice_values = Array(7);
 
-        for ( let dice_counter = 0; dice_counter < no_of_dice; dice_counter++ ) {
+        for (let dice_counter = 0; dice_counter < no_of_dice; dice_counter++) {
             this.dice_objects.push(new Die());
         }
 
         this.throw();
+    }
+
+    saveData() {
+        for (let i = 1; i <= this.noOfPlayers; i++) {
+            this.inputValues = JSON.stringify(
+                Array.from(document.querySelectorAll(`.player${i}`)).map((element) =>
+                    Number(element.value)
+                )
+            );
+            localStorage.setItem(`p${i}Key`, this.inputValues);
+        }
+    }
+
+    getdata() {
+        for (let i = 1; i <= this.noOfPlayers; i++) {
+            let storage = JSON.parse(localStorage.getItem(`p${i}Key`)); // [2, 4, 3, 15]
+            document.querySelectorAll(`.player${i}`)
+                .map((element, index) => element.value = storage[index]);
+
+        }
+    }
+
+    full_house() {
+        let has_two = false;
+        let has_three = false;
+
+        let sum = 0;
+
+        for (let i = 1; i < this.dice_values.length; i++) {
+            if (this.dice_values[i] === 2) {
+                has_two = true;
+                sum += (2 * i);
+            }
+
+            if (this.dice_values[i] === 3) {
+                has_three = true;
+                sum += (3 * i);
+            }
+        }
+
+        return has_two && has_three ? sum : false;
     }
 
     small_straight() {
@@ -43,15 +84,23 @@ class Dice {
             this.dice_values[5] == 1
     }
 
+    large_straight() {
+        return this.dice_values[2] == 1 &&
+            this.dice_values[3] == 1 &&
+            this.dice_values[4] == 1 &&
+            this.dice_values[5] == 1 &&
+            this.dice_values[6] == 1
+    }
+
     values() {
         this.dice_values.fill(0);
-        for ( let current_dice of this.dice_objects ) {
+        for (let current_dice of this.dice_objects) {
             this.dice_values[current_dice.value]++;
         }
     }
 
     throw() {
-        for ( let current_dice of this.dice_objects ) {
+        for (let current_dice of this.dice_objects) {
             current_dice.throw();
         }
         this.values();

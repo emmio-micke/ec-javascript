@@ -1,0 +1,19 @@
+article.main-story {
+  clear: both;
+}
+
+article.main-story div.post {
+  display: flex;
+}
+
+article.main-story img {
+}
+
+div.article-list article {
+  float: none;
+  clear: both;
+}
+
+div.article-list article img {
+  float: left;
+}
